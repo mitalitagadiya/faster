@@ -325,7 +325,7 @@ function Home(props) {
             </div>
             {/* Team End */}
             {/* Testimonial Start */}
-            <div className="container-fluid py-5">
+            {/* <div className="container-fluid py-5">
                 <div className="container">
                     <div className="text-center pb-2">
                         <h6 className="text-primary text-uppercase font-weight-bold">Testimonial</h6>
@@ -378,7 +378,7 @@ function Home(props) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
             {/* Testimonial End */}
             {/* Blog Start */}
             <div className="container-fluid pt-5">
