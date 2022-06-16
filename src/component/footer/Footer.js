@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Footer(props) {
     return (
@@ -27,6 +28,7 @@ function Footer(props) {
                                     <a className="text-white mb-2" href="#"><i className="fa fa-angle-right mr-2" />Our Services</a>
                                     <a className="text-white mb-2" href="#"><i className="fa fa-angle-right mr-2" />Pricing Plan</a>
                                     <a className="text-white" href="#"><i className="fa fa-angle-right mr-2" />Contact Us</a>
+                                    <Link className="nav-link text-white py-0" to="/rexexample"><i className="fa fa-angle-right mr-2" />Ref Example</Link>
                                 </div>
                             </div>
                         </div>

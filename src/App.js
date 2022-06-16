@@ -10,6 +10,7 @@ import Price from './Container/price/Price';
 import Bloggrid from './Container/blog-grid/Bloggrid';
 import Blogdetail from './Container/blog-detail/Blogdetail';
 import Contact from './Container/contact/Contact';
+import Refexample from './Container/refexample/Refexample';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path={"/blog-grid"} exact component={Bloggrid}></Route>
             <Route path={"/blog-detail"} exact component={Blogdetail}></Route>
             <Route path={"/contact"} exact component={Contact}></Route>
+            <Route path={"/rexexample"} exact component={Refexample}></Route>
         </Switch>
         <Footer />
     </div>

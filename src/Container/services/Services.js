@@ -33,6 +33,10 @@ function Services(props) {
         },
     ]
 
+    const get = (id) => {
+        console.log(id);
+    }
+
     return (
         <div>
             {/* Header Start */}
@@ -149,7 +153,10 @@ function Services(props) {
                         <h1 className="mb-4">Our Clients Say</h1>
                     </div>
                     <div>
-                        <List isData = {data} />
+                        <List 
+                            isData = {data} 
+                            getId = {get}
+                        />
                     </div>
                 </div>
             </div>

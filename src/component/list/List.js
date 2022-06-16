@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
+import { Card, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap';
 
-function List({ isData }) {
+function List({ isData, getId }) {
     return (
         <div>
             {
@@ -21,6 +21,7 @@ function List({ isData }) {
                                 <CardText>
                                     {d.price}
                                 </CardText>
+                                <Button onClick={() => getId(d.id)}>Click</Button>
                             </CardBody>
                         </Card>
                     )
