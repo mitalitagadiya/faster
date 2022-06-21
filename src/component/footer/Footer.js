@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function Footer(props) {
     return (
         <div>
-            <div className="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
+            <div className="container-fluid bg-dark text-white mr-5 mt-5 py-5 px-sm-3 px-md-5">
                 <div className="row pt-5">
                     <div className="col-lg-7 col-md-6">
                         <div className="row">
@@ -27,8 +27,8 @@ function Footer(props) {
                                     <a className="text-white mb-2" href="#"><i className="fa fa-angle-right mr-2" />About Us</a>
                                     <a className="text-white mb-2" href="#"><i className="fa fa-angle-right mr-2" />Our Services</a>
                                     <a className="text-white mb-2" href="#"><i className="fa fa-angle-right mr-2" />Pricing Plan</a>
-                                    <a className="text-white" href="#"><i className="fa fa-angle-right mr-2" />Contact Us</a>
-                                    <Link className="nav-link text-white py-0" to="/rexexample"><i className="fa fa-angle-right mr-2" />Ref Example</Link>
+                                    <a className="text-white mb-2" href="#"><i className="fa fa-angle-right mr-2" />Contact Us</a>
+                                    <Link className="nav-link text-white py-0 mb-2" to="/rexexample"><i className="fa fa-angle-right mr-2" />Ref Example</Link>
                                 </div>
                             </div>
                         </div>

@@ -53,16 +53,16 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
 
-body {
-  margin: 0;
+/* body {
+  margin: 0 auto !important;
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   color: #757575;
-  text-align: left;
+  text-align: center !important;
   background-color: #fff;
-}
+} */
 
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important;
@@ -604,7 +604,6 @@ pre code {
   margin-right: auto;
   margin-left: auto;
 }
-
 @media (min-width: 576px) {
   .container, .container-sm {
     max-width: 540px;
@@ -4108,7 +4107,7 @@ input[type="button"].btn-block {
   }
   .navbar-expand-sm > .container,
   .navbar-expand-sm > .container-fluid, .navbar-expand-sm > .container-sm, .navbar-expand-sm > .container-md, .navbar-expand-sm > .container-lg, .navbar-expand-sm > .container-xl {
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
   }
   .navbar-expand-sm .navbar-collapse {
     display: flex !important;
