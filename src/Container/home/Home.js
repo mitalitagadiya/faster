@@ -1,6 +1,29 @@
+import { Form, Formik, useFormik } from 'formik';
 import React from 'react';
+import * as yup from 'yup';
 
 function Home(props) {
+    let schema = yup.object().shape({
+        name: yup.string().required("Please Enter Name."),
+        email: yup.string().email("Please Enter Vaild Email Id.").required("Please Enter Email Id."),
+        services: yup.string().required("Please Enter Any Services.")
+    });
+
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+            email: '',
+            services: ''
+        },
+        validationSchema: schema,
+        onSubmit: values => {
+            alert(JSON.stringify(values, null, 2));
+        },
+        enableReinitialize: true
+    });
+
+    const { handleChange, errors, handleSubmit, touched, handleBlur } = formik;
+
     return (
         <div>
             <div className="jumbotron jumbotron-fluid mb-5">
@@ -84,25 +107,30 @@ function Home(props) {
                         </div>
                         <div className="col-lg-5">
                             <div className="bg-primary py-5 px-4 px-sm-5">
-                                <form className="py-5">
-                                    <div className="form-group">
-                                        <input type="text" className="form-control border-0 p-4" placeholder="Your Name" required="required" />
-                                    </div>
-                                    <div className="form-group">
-                                        <input type="email" className="form-control border-0 p-4" placeholder="Your Email" required="required" />
-                                    </div>
-                                    <div className="form-group">
-                                        <select className="custom-select border-0 px-4" style={{ height: 47 }}>
-                                            <option selected>Select A Service</option>
-                                            <option value={1}>Service 1</option>
-                                            <option value={2}>Service 1</option>
-                                            <option value={3}>Service 1</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <button className="btn btn-dark btn-block border-0 py-3" type="submit">Get A Quote</button>
-                                    </div>
-                                </form>
+                                <Formik values={formik}>
+                                    <Form className="py-5" onSubmit={handleSubmit}>
+                                        <div className="form-group">
+                                            <input type="text" name="name" className="form-control border-0 p-4" placeholder="Your Name" onChange={handleChange} onBlur={handleBlur} />
+                                            <p className='text-white'>{errors.name && touched.name ? errors.name : ''}</p>
+                                        </div>
+                                        <div className="form-group">
+                                            <input type="email" name="email" className="form-control border-0 p-4" placeholder="Your Email" onChange={handleChange} onBlur={handleBlur} />
+                                            <p className='text-white'>{errors.email && touched.email ? errors.email : ''}</p>
+                                        </div>
+                                        <div className="form-group">
+                                            <select name="services" className="custom-select border-0 px-4" onChange={handleChange} onBlur={handleBlur} style={{ height: 47 }}>
+                                                <option selected>Select A Service</option>
+                                                <option value={1}>Service 1</option>
+                                                <option value={2}>Service 1</option>
+                                                <option value={3}>Service 1</option>
+                                            </select>
+                                            <p className='text-white'>{errors.services && touched.services ? errors.services : ''}</p>
+                                        </div>
+                                        <div>
+                                            <button className="btn btn-dark btn-block border-0 py-3" type="submit">Get A Quote</button>
+                                        </div>
+                                    </Form>
+                                </Formik>
                             </div>
                         </div>
                     </div>

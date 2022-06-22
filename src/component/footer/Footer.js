@@ -1,7 +1,26 @@
+import { Form, Formik, useFormik } from 'formik';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import * as yup from 'yup';
 
 function Footer(props) {
+    let schema = yup.object().shape({
+        email: yup.string().email("Please Enter Vaild Email Id.").required("Please Enter Email Id."),
+    });
+
+    const formik = useFormik({
+        initialValues: {
+            email: ''
+        },
+        validationSchema: schema,
+        onSubmit: values => {
+            alert(JSON.stringify(values, null, 2));
+        },
+        enableReinitialize: true
+    });
+
+    const { handleChange, errors, handleSubmit, touched, handleBlur } = formik;
+
     return (
         <div>
             <div className="container-fluid bg-dark text-white mr-5 mt-5 py-5 px-sm-3 px-md-5">
@@ -20,7 +39,7 @@ function Footer(props) {
                                     <a className="btn btn-outline-light btn-social" href="#"><i className="fab fa-instagram" /></a>
                                 </div>
                             </div>
-                            <div className="col-md-6 mb-5">
+                            <div className="col-md-6 mb-5z">
                                 <h3 className="text-primary mb-4">Quick Links</h3>
                                 <div className="d-flex flex-column justify-content-start">
                                     <a className="text-white mb-2" href="#"><i className="fa fa-angle-right mr-2" />Home</a>
@@ -36,14 +55,17 @@ function Footer(props) {
                     <div className="col-lg-5 col-md-6 mb-5">
                         <h3 className="text-primary mb-4">Newsletter</h3>
                         <p>Rebum labore lorem dolores kasd est, et ipsum amet et at kasd, ipsum sea tempor magna tempor. Accu kasd sed ea duo ipsum. Dolor duo eirmod sea justo no lorem est diam</p>
-                        <div className="w-100">
-                            <div className="input-group">
-                                <input type="text" className="form-control border-light" style={{ padding: 30 }} placeholder="Your Email Address" />
-                                <div className="input-group-append">
-                                    <button className="btn btn-primary px-4">Sign Up</button>
+                        <Formik values={formik}>
+                            <Form onSubmit={handleSubmit} className="w-100">
+                                <div className="input-group">
+                                    <input type="text" name="email" className="form-control border-light" style={{ padding: 30 }} placeholder="Your Email Address" onChange={handleChange} onBlur={handleBlur} />
+                                    <div className="input-group-append">
+                                        <button type="submit" className="btn btn-primary px-4">Sign Up</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                                <p className='text-danger'>{errors.email && touched.email ? errors.email : ''}</p>
+                            </Form>
+                        </Formik>
                     </div>
                 </div>
             </div>

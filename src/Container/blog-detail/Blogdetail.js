@@ -1,6 +1,31 @@
+import { Form, Formik, useFormik } from 'formik';
 import React from 'react';
+import * as yup from 'yup';
 
 function Blogdetail(props) {
+    let schema = yup.object().shape({
+        name: yup.string().required("Please Enter Name."),
+        email: yup.string().email("Please Enter Vaild Email Id.").required("Please Enter Email Id."),
+        website: yup.string().required("Please Enter Website Name."),
+        message : yup.string().required("Please Enter Message.")
+    });
+
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+            email: '',
+            website: '',
+            message :''
+        },
+        validationSchema: schema,
+        onSubmit: values => {
+            alert(JSON.stringify(values, null, 2));
+        },
+        enableReinitialize: true
+    });
+
+    const { handleChange, errors, handleSubmit, touched, handleBlur } = formik;
+
     return (
         <div>
             {/* Header Start */}
@@ -121,27 +146,33 @@ function Blogdetail(props) {
                         {/* Comment Form Start */}
                         <div className="bg-secondary mb-3" style={{ padding: 30 }}>
                             <h3 className="mb-4">Leave a comment</h3>
-                            <form>
-                                <div className="form-group">
-                                    <label htmlFor="name">Name *</label>
-                                    <input type="text" className="form-control border-0" id="name" />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="email">Email *</label>
-                                    <input type="email" className="form-control border-0" id="email" />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="website">Website</label>
-                                    <input type="url" className="form-control border-0" id="website" />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="message">Message *</label>
-                                    <textarea id="message" cols={30} rows={5} className="form-control border-0" defaultValue={""} />
-                                </div>
-                                <div className="form-group mb-0">
-                                    <input type="submit" defaultValue="Leave a comment" className="btn btn-primary font-weight-semi-bold py-2 px-3" />
-                                </div>
-                            </form>
+                            <Formik values={formik}>
+                                <Form onSubmit={handleSubmit}>
+                                    <div className="form-group">
+                                        <label htmlFor="name">Name *</label>
+                                        <input type="text" className="form-control border-0" id="name" name="name" onChange={handleChange} onBlur={handleBlur} />
+                                        <p className='text-danger'>{errors.name && touched.name ?errors.name : ''}</p>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="email">Email *</label>
+                                        <input type="email" className="form-control border-0" id="email" name="email" onChange={handleChange} onBlur={handleBlur}/>
+                                        <p className='text-danger'>{errors.email && touched.email ?errors.email : ''}</p>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="website">Website</label>
+                                        <input type="url" className="form-control border-0" id="website"  name="website" onChange={handleChange} onBlur={handleBlur}/>
+                                        <p className='text-danger'>{errors.website && touched.website ?errors.website : ''}</p>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="message">Message *</label>
+                                        <textarea id="message" cols={30} rows={5} className="form-control border-0" defaultValue={""} name="message" onChange={handleChange} onBlur={handleBlur}/>
+                                        <p className='text-danger'>{errors.message && touched.message ?errors.message : ''}</p>
+                                    </div>
+                                    <div className="form-group mb-0">
+                                        <input type="submit" defaultValue="Leave a comment" className="btn btn-primary font-weight-semi-bold py-2 px-3" />
+                                    </div>
+                                </Form>
+                            </Formik>
                         </div>
                         {/* Comment Form End */}
                     </div>

@@ -1,6 +1,31 @@
+import { Form, Formik, useFormik } from 'formik';
 import React from 'react';
+import * as yup from 'yup';
 
 function Contact(props) {
+    let schema = yup.object().shape({
+        name: yup.string().required("Please Enter Name."),
+        email: yup.string().email("Please Enter Vaild Email Id.").required("Please Enter Email Id."),
+        subject: yup.string().max(30,"It's to 30 character").required("Please Enter Any Subject."),
+        message: yup.string().required("Please Enter Any Message.")
+    });
+
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+            email: '',
+            subject: '',
+            message : ''
+        },
+        validationSchema: schema,
+        onSubmit: values => {
+            alert(JSON.stringify(values, null, 2));
+        },
+        enableReinitialize: true
+    });
+
+    const { handleChange, errors, handleSubmit, touched, handleBlur } = formik;
+
     return (
         <div>
             {/* Header Start */}
@@ -30,28 +55,30 @@ function Contact(props) {
                             <h1 className="mb-4">Contact For Any Queries</h1>
                             <div className="contact-form bg-secondary" style={{ padding: 30 }}>
                                 <div id="success" />
-                                <form name="sentMessage" id="contactForm" noValidate="novalidate">
-                                    <div className="control-group">
-                                        <input type="text" className="form-control border-0 p-4" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
-                                        <p className="help-block text-danger" />
-                                    </div>
-                                    <div className="control-group">
-                                        <input type="email" className="form-control border-0 p-4" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
-                                        <p className="help-block text-danger" />
-                                    </div>
-                                    <div className="control-group">
-                                        <input type="text" className="form-control border-0 p-4" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
-                                        <p className="help-block text-danger" />
-                                    </div>
-                                    <div className="control-group">
-                                        <textarea className="form-control border-0 py-3 px-4" rows={3} id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message" defaultValue={""} />
-                                        <p className="help-block text-danger" />
-                                    </div>
-                                    <div>
-                                        <button className="btn btn-primary py-3 px-4" type="submit" id="sendMessageButton">Send
-                                            Message</button>
-                                    </div>
-                                </form>
+                                <Formik vlaues={formik}>
+                                    <Form name="sentMessage" onSubmit={handleSubmit} id="contactForm" noValidate="novalidate">
+                                        <div className="control-group">
+                                            <input type="text" className="form-control border-0 p-4" id="name" placeholder="Your Name" name="name" data-validation-required-message="Please enter your name" onChange={handleChange} onBlur={handleBlur} />
+                                            <p className='text-danger'>{errors.name &&  touched.name ? errors.name : ''}</p>
+                                        </div>
+                                        <div className="control-group">
+                                            <input type="email" className="form-control border-0 p-4" id="email" placeholder="Your Email" name="email" data-validation-required-message="Please enter your email" onChange={handleChange} onBlur={handleBlur}/>
+                                            <p className='text-danger'>{errors.email &&  touched.email ? errors.email : ''}</p>
+                                        </div>
+                                        <div className="control-group">
+                                            <input type="text" className="form-control border-0 p-4" id="subject" placeholder="Subject" name="subject" data-validation-required-message="Please enter a subject" onChange={handleChange} onBlur={handleBlur}/>
+                                            <p className='text-danger'>{errors.subject &&  touched.subject ? errors.subject : ''}</p>
+                                        </div>
+                                        <div className="control-group">
+                                            <textarea className="form-control border-0 py-3 px-4" rows={3} id="message" placeholder="Message" name="message" data-validation-required-message="Please enter your message" defaultValue={""} onChange={handleChange} onBlur={handleBlur}/>
+                                            <p className='text-danger'>{errors.message &&  touched.message ? errors.message : ''}</p>
+                                        </div>
+                                        <div>
+                                            <button className="btn btn-primary py-3 px-4" type="submit" id="sendMessageButton">Send
+                                                Message</button>
+                                        </div>
+                                    </Form>
+                                </Formik>
                             </div>
                         </div>
                     </div>
