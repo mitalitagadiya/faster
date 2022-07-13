@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import SearchIcon from '@mui/icons-material/Search';
 
 function Header(props) {
     return (
@@ -50,17 +51,20 @@ function Header(props) {
                             {/* <a href="index.html" className="nav-item nav-link active">Home</a> */}
                             <NavLink className="nav-item nav-link active" to="/">Home</NavLink>
                             <NavLink className="nav-item nav-link" to="/aboutus">About</NavLink>
-                            <NavLink  className="nav-item nav-link" to="/services">Service</NavLink>
+                            <NavLink className="nav-item nav-link" to="/services">Service</NavLink>
                             <NavLink className="nav-item nav-link" to="/price">Price</NavLink>
                             <div className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                 <div className="dropdown-menu rounded-0 m-0">
                                     <NavLink className="dropdown-item" to="/blog-grid">Blog Grid</NavLink>
-                                    <NavLink  className="dropdown-item" to="/blog-detail">Blog Detail</NavLink>
+                                    <NavLink className="dropdown-item" to="/blog-detail">Blog Detail</NavLink>
                                 </div>
                             </div>
                             <NavLink className="nav-item nav-link" to="/contact">Contact</NavLink>
                         </div>
+                        <a className="text-primary px-2" href>
+                            <SearchIcon />
+                        </a>
                         <a href className="btn btn-primary py-2 px-4 d-none d-lg-block">Get A Quote</a>
                     </div>
                 </nav>
